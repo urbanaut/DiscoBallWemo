@@ -1,14 +1,14 @@
+import java.util.Calendar;
 import java.util.Properties;
 import javax.mail.*;
 
 public class Main {
 
-
-
     public static void main(String[] args) {
 
         Properties props = new Properties();
         props.setProperty("mail.store.protocol", "imaps");
+
         try {
             Session session = Session.getInstance(props, null);
 
@@ -27,22 +27,39 @@ public class Main {
             long maxDurationInMilliseconds = 30 * 60 * 1000;
             long totalDuration = startTime + maxDurationInMilliseconds;
 
+//            Calendar calendar = Calendar.getInstance();
+//            calendar.add(Calendar.MINUTE, 5);
+//            long stopPollingTime = calendar.getTimeInMillis();
 
             //Run for 30 Minutes when the reader finds a recent email
             while(System.currentTimeMillis() < totalDuration){
                 if(msg.isSet(Flags.Flag.RECENT)) {
-                    WemoDevice wd = new WemoDevice("http://10.1.10.102:49153/setup.xml");
+                    WemoDevice wd = new WemoDevice("http://10.1.10.105:49153/setup.xml");
                     wd.turnOn();
+                    try {
+                        Thread.sleep(100);
+                        wd.turnOff();
+                    } catch (InterruptedException e) {
+                    }
                 }
-                //need to put in some extra logic to stop the disco ball when it looses connection
+
             }
 
             msg.setFlag(Flags.Flag.DELETED, true);
-
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
     }
+
+//    public void turnOnWemo(){
+//        WemoDevice wd = new WemoDevice("http://10.1.10.100:49153/setup.xml");
+//        wd.turnOn();
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
