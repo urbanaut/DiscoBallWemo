@@ -7,6 +7,7 @@ import javax.mail.*;
 public class Main {
 
     public static String ip = "10.1.10.105";
+    public static String wemoName = "DiscoWemo";
 
     public static void main(String[] args) {
 
@@ -40,41 +41,32 @@ public class Main {
             System.out.println("Subject: " + msg.getSubject());
             System.out.println("Content: " + msg.getContent());
 
-//            long startTime = System.currentTimeMillis();
-//            long maxDurationInMilliseconds = 30 * 60 * 1000; //
-//            long totalDuration = startTime + maxDurationInMilliseconds;
 
-            //Run for 30 Minutes when the reader finds a recent email
-//            while(System.currentTimeMillis() < totalDuration){
-//                if(msg.isSet(Flags.Flag.RECENT)) {
-//                    //WemoDevice wd = new WemoDevice("http://10.1.10.105:49153/setup.xml");
-//                    //wd.turnOn();
-//
-//                }
-//
-//            }
-            Timer timer = new Timer();
-            long interval = (2*60*1000);
+            long interval = (30*60*1000);// Disco Ball will run for 30 minutes
             if(msg.isSet(Flags.Flag.RECENT)) {
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        //WemoDevice wd = new WemoDevice("http://"+ ip + "/setup.xml");
-                        System.out.println("Wemo is turned on");
-                        try {
-                            Thread.sleep(5000);
-                            //wd.turnOff();
-                        } catch (InterruptedException e) {
-                            System.out.println("Sleep was interrupted. Could possibly be from connection timeout at: " + ip);
-                        }
-                    }
-                },0, interval);
+
+                //WemoDevice wd = new WemoDevice("http://"+ ip + "/setup.xml");
+                try {
+                    msg.setFlag(Flags.Flag.DELETED, true);
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(wemoName + " is on");
+                try {
+                    Thread.sleep(interval);
+                    //wd.turnOff();
+                    System.out.println(wemoName + " is off");
+
+                } catch (InterruptedException e) {
+                    System.out.println("Sleep was interrupted. Could possibly be from connection timeout at: " + ip);
+                }
             }
-            msg.setFlag(Flags.Flag.DELETED, true);
+
 
         } catch (Exception ex) {
             System.out.println("No recent messages found in inbox: stgnewhirediscoball@stgconsulting.com");
-            System.out.println("Wemo is turned off");
+            //wd.turnOff();
+            System.out.println(wemoName + " is off");
 
         }
     }
