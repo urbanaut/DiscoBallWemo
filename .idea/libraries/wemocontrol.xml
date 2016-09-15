@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="wemocontrol">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/wemocontrol/build/libs/wemocontrol.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
