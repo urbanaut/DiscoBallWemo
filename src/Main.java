@@ -1,3 +1,4 @@
+import java.io.FileReader;
 import java.util.Calendar;
 import java.util.Properties;
 import java.util.Timer;
@@ -17,13 +18,13 @@ public class Main {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                runDiscoBall();
+                runWemoSwitch();
             }
         }, 0, interval);
 
     }
 
-    public static void runDiscoBall(){
+    public static void runWemoSwitch(){
         Properties props = new Properties();
         props.setProperty("mail.store.protocol", "imaps");
 
@@ -70,4 +71,12 @@ public class Main {
 
         }
     }
+
+//    public static void readInCredentials(){
+//        String fileName = "C:\DiscoBallWemo\src\credentials.txt";
+//        String line = null;
+//
+//        FileReader fileReader = new FileReader(fileName);
+//
+//    }
 }

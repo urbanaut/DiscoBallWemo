@@ -25,7 +25,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="wemocontrol" level="project" />
-    <orderEntry type="library" name="mail-1.4.7" level="project" />
+    <orderEntry type="library" exported="" name="wemocontrol" level="project" />
+    <orderEntry type="library" exported="" name="mail-1.4.7" level="project" />
   </component>
 </module>
