@@ -1,14 +1,11 @@
-import java.io.FileReader;
-import java.util.Calendar;
-import java.util.Properties;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.io.*;
+import java.util.*;
 import javax.mail.*;
 
 public class Main {
 
     public static String ip = "10.1.10.105";
-    public static String wemoName = "DiscoWemo";
+    public static String wemoName = "STG Disco Ball WeMo";
 
     public static void main(String[] args) {
 
@@ -46,16 +43,17 @@ public class Main {
             long interval = (30*60*1000);// Disco Ball will run for 30 minutes
             if(msg.isSet(Flags.Flag.RECENT)) {
 
-                //WemoDevice wd = new WemoDevice("http://"+ ip + "/setup.xml");
+                WemoDevice wd = new WemoDevice("http://"+ip+":49153/setup.xml");
                 try {
                     msg.setFlag(Flags.Flag.DELETED, true);
                 } catch (MessagingException e) {
                     e.printStackTrace();
                 }
+                wd.turnOn();
                 System.out.println(wemoName + " is on");
                 try {
                     Thread.sleep(interval);
-                    //wd.turnOff();
+                    wd.turnOff();
                     System.out.println(wemoName + " is off");
 
                 } catch (InterruptedException e) {
@@ -68,15 +66,6 @@ public class Main {
             System.out.println("No recent messages found in inbox: stgnewhirediscoball@stgconsulting.com");
             //wd.turnOff();
             System.out.println(wemoName + " is off");
-
         }
     }
-
-//    public static void readInCredentials(){
-//        String fileName = "C:\DiscoBallWemo\src\credentials.txt";
-//        String line = null;
-//
-//        FileReader fileReader = new FileReader(fileName);
-//
-//    }
 }
