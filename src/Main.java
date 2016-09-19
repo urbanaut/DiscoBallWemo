@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.*;
 import javax.mail.*;
 
@@ -6,18 +5,22 @@ public class Main {
 
     public static String ip = "10.1.10.105";
     public static String wemoName = "STG Disco Ball WeMo";
-
+    public static Scanner reader = new Scanner(System.in);
     public static void main(String[] args) {
 
-        Timer timer = new Timer();
-        long interval = (5*60*1000); //polls for 5 mins
+        //Timer timer = new Timer();
+        //long interval = (5*60*1000); //polls for 5 mins
 
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
+       // timer.schedule(new TimerTask() {
+           // @Override
+          //  public void run() {
                 runWemoSwitch();
-            }
-        }, 0, interval);
+
+               // }
+           // }
+        //}, 0, interval);
+
+
 
     }
 
@@ -63,7 +66,7 @@ public class Main {
 
 
         } catch (Exception ex) {
-            System.out.println("No recent messages found in inbox: stgnewhirediscoball@stgconsulting.com");
+            System.out.println("No recent messages found in inbox: stgnewhirediscoball@gmail.com");
             //wd.turnOff();
             System.out.println(wemoName + " is off");
         }
