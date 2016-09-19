@@ -69,6 +69,7 @@ public class Main {
             System.out.println("No recent messages found in inbox: stgnewhirediscoball@gmail.com");
             //wd.turnOff();
             System.out.println(wemoName + " is off");
+            ex.printStackTrace();
         }
     }
 }
