@@ -3,28 +3,18 @@ import javax.mail.*;
 
 public class Main {
 
-    public static String ip = "10.1.10.105";
-    public static String wemoName = "STG Disco Ball WeMo";
-    public static Scanner reader = new Scanner(System.in);
+    public static String wemoIp;
+    public static long runDuration;
+    public static String mailBoxName;
+    public static String mailBoxPassword;
+
     public static void main(String[] args) {
 
-        //Timer timer = new Timer();
-        //long interval = (5*60*1000); //polls for 5 mins
+        runDuration = Long.parseLong(args[0]);
+        wemoIp = args[1];
+        mailBoxName = args[2];
+        mailBoxPassword = args[3];
 
-       // timer.schedule(new TimerTask() {
-           // @Override
-          //  public void run() {
-                runWemoSwitch();
-
-               // }
-           // }
-        //}, 0, interval);
-
-
-
-    }
-
-    public static void runWemoSwitch(){
         Properties props = new Properties();
         props.setProperty("mail.store.protocol", "imaps");
 
@@ -32,7 +22,7 @@ public class Main {
             Session session = Session.getInstance(props, null);
 
             Store store = session.getStore();
-            store.connect("imap.gmail.com", "stgnewhirediscoball@gmail.com", "!stgrocks!");
+            store.connect("imap.gmail.com", mailBoxName, mailBoxPassword);
 
             Folder inbox = store.getFolder("INBOX");
             inbox.open(Folder.READ_WRITE);
@@ -43,24 +33,24 @@ public class Main {
             System.out.println("Content: " + msg.getContent());
 
 
-            long interval = (30*60*1000);// Disco Ball will run for 30 minutes
-            if(msg.isSet(Flags.Flag.RECENT)) {
+            long interval = (runDuration);// Disco Ball will run for 30 minutes
+            if (msg.isSet(Flags.Flag.RECENT)) {
 
-                WemoDevice wd = new WemoDevice("http://"+ip+":49153/setup.xml");
+                WemoDevice wd = new WemoDevice("http://" + wemoIp + ":49153/setup.xml");
                 try {
                     msg.setFlag(Flags.Flag.DELETED, true);
                 } catch (MessagingException e) {
                     e.printStackTrace();
                 }
                 wd.turnOn();
-                System.out.println(wemoName + " is on");
+                System.out.println(wemoIp + " is on");
                 try {
                     Thread.sleep(interval);
                     wd.turnOff();
-                    System.out.println(wemoName + " is off");
+                    System.out.println(wemoIp + " is off");
 
                 } catch (InterruptedException e) {
-                    System.out.println("Sleep was interrupted. Could possibly be from connection timeout at: " + ip);
+                    e.printStackTrace();
                 }
             }
 
@@ -68,8 +58,9 @@ public class Main {
         } catch (Exception ex) {
             System.out.println("No recent messages found in inbox: stgnewhirediscoball@gmail.com");
             //wd.turnOff();
-            System.out.println(wemoName + " is off");
-            ex.printStackTrace();
+            System.out.println(wemoIp + " is off");
+            //ex.printStackTrace();
         }
+
     }
 }
