@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DiscoBallWemo:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DiscoBallWemo_jar</output-path>
+    <root id="archive" name="DiscoBallWemo.jar">
+      <element id="module-output" name="DiscoBallWemo" />
+      <element id="extracted-dir" path="$USER_HOME$/wemocontrol/build/libs/wemocontrol.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/mail-1.4.7 .jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
