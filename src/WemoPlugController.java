@@ -10,8 +10,8 @@ public class WemoPlugController {
     private String mailBoxName;
     private String mailBoxPassword;
 
-    private Message msg;
-    private WemoDevice wd;
+    public Message msg;
+    public WemoDevice wd;
 
     private WemoPlugController(String wemoIp, String wemoName, String runDuration, String mailBoxName, String mailBoxPassword){
 
@@ -23,7 +23,7 @@ public class WemoPlugController {
     }
 
     public static void main(String[] args) {
-        
+
         WemoPlugController wpc = new WemoPlugController(args[0], args[1], args[2], args[3], args[4]);
         //System.out.println(wpc.toString());
         wpc.runController();
@@ -32,9 +32,23 @@ public class WemoPlugController {
     private void runController(){
 
         try {
+            Properties props = new Properties();
+            props.setProperty("mail.store.protocol", "imaps");
+
+            Session session = Session.getInstance(props, null);
+
+            Store store = session.getStore();
+            store.connect("imap.gmail.com", mailBoxName, mailBoxPassword);
+            Folder inbox = store.getFolder("INBOX");
+            inbox.open(Folder.READ_WRITE);
+
+            msg = inbox.getMessage(inbox.getMessageCount());
+            msg.setFlag(Flags.Flag.RECENT, true);
+
 
             if (msg.isSet(Flags.Flag.RECENT)) {
-                getEmail();
+                System.out.println("Subject: " + msg.getSubject());
+                System.out.println("Content: " + msg.getContent());
                 wd = new WemoDevice("http://" + wemoIp + ":49153/setup.xml");
                 msg.setFlag(Flags.Flag.DELETED, true);
                 wd.turnOn();
@@ -68,27 +82,5 @@ public class WemoPlugController {
         }
     }
 
-    private void getEmail(){
-
-        Properties props = new Properties();
-        props.setProperty("mail.store.protocol", "imaps");
-
-        try{
-            Session session = Session.getInstance(props, null);
-
-            Store store = session.getStore();
-            store.connect("imap.gmail.com", mailBoxName, mailBoxPassword);
-            Folder inbox = store.getFolder("INBOX");
-            inbox.open(Folder.READ_WRITE);
-
-            msg = inbox.getMessage(inbox.getMessageCount());
-            msg.setFlag(Flags.Flag.RECENT, true);
-            System.out.println("Subject: " + msg.getSubject());
-            System.out.println("Content: " + msg.getContent());
-        }catch (Exception e){
-            System.out.println("Error: " + e.getMessage());
-        }
-
-    }
 
 }
