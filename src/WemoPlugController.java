@@ -23,8 +23,7 @@ public class WemoPlugController {
     }
 
     public static void main(String[] args) {
-
-        long parsedRunDuration = Long.parseLong(args[2]);
+        
         WemoPlugController wpc = new WemoPlugController(args[0], args[1], args[2], args[3], args[4]);
         //System.out.println(wpc.toString());
         wpc.runController();
