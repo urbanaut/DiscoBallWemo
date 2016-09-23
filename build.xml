@@ -93,18 +93,6 @@
   
   
   <!-- Global Libraries -->
-  <!-- Register Custom Compiler Taskdefs -->
-  <property name="javac2.home" value="${idea.home}/lib"/>
-  <path id="javac2.classpath">
-    <pathelement location="${javac2.home}/javac2.jar"/>
-    <pathelement location="${javac2.home}/jdom.jar"/>
-    <pathelement location="${javac2.home}/asm-all.jar"/>
-    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
-  </path>
-  <target name="register.custom.compilers">
-    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
-    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
-  </target>
   
   <!-- Modules -->
   
@@ -171,15 +159,15 @@
   
   <target name="compile.module.discoballwemo" depends="compile.module.discoballwemo.production,compile.module.discoballwemo.tests" description="Compile module DiscoBallWemo"/>
   
-  <target name="compile.module.discoballwemo.production" depends="register.custom.compilers" description="Compile module DiscoBallWemo; production classes">
+  <target name="compile.module.discoballwemo.production" description="Compile module DiscoBallWemo; production classes">
     <mkdir dir="${discoballwemo.output.dir}"/>
-    <javac2 destdir="${discoballwemo.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.discoballwemo}/javac">
+    <javac destdir="${discoballwemo.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.discoballwemo}/javac">
       <compilerarg line="${compiler.args.discoballwemo}"/>
       <bootclasspath refid="discoballwemo.module.bootclasspath"/>
       <classpath refid="discoballwemo.module.production.classpath"/>
       <src refid="discoballwemo.module.sourcepath"/>
       <patternset refid="excluded.from.compilation.discoballwemo"/>
-    </javac2>
+    </javac>
     
     <copy todir="${discoballwemo.output.dir}">
       <fileset dir="${module.discoballwemo.basedir}/src">
@@ -189,7 +177,7 @@
     </copy>
   </target>
   
-  <target name="compile.module.discoballwemo.tests" depends="register.custom.compilers,compile.module.discoballwemo.production" description="compile module DiscoBallWemo; test classes" unless="skip.tests"/>
+  <target name="compile.module.discoballwemo.tests" depends="compile.module.discoballwemo.production" description="compile module DiscoBallWemo; test classes" unless="skip.tests"/>
   
   <target name="clean.module.discoballwemo" description="cleanup module">
     <delete dir="${discoballwemo.output.dir}"/>
