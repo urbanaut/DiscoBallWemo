@@ -129,28 +129,28 @@
   
   <path id="discoballwemo.module.production.classpath">
     <path refid="${module.jdk.classpath.discoballwemo}"/>
-    <pathelement location="${basedir}/../Users/rachael.hull/wemocontrol/build/libs/wemocontrol.jar"/>
-    <pathelement location="${basedir}/../Users/rachael.hull/Desktop/mail-1.4.7 .jar"/>
+    <pathelement location="${basedir}/libs/mail-1.4.7 .jar"/>
+    <pathelement location="${basedir}/libs/wemocontrol.jar"/>
   </path>
   
   <path id="discoballwemo.runtime.production.module.classpath">
     <pathelement location="${discoballwemo.output.dir}"/>
-    <pathelement location="${basedir}/../Users/rachael.hull/wemocontrol/build/libs/wemocontrol.jar"/>
-    <pathelement location="${basedir}/../Users/rachael.hull/Desktop/mail-1.4.7 .jar"/>
+    <pathelement location="${basedir}/libs/mail-1.4.7 .jar"/>
+    <pathelement location="${basedir}/libs/wemocontrol.jar"/>
   </path>
   
   <path id="discoballwemo.module.classpath">
     <path refid="${module.jdk.classpath.discoballwemo}"/>
     <pathelement location="${discoballwemo.output.dir}"/>
-    <pathelement location="${basedir}/../Users/rachael.hull/wemocontrol/build/libs/wemocontrol.jar"/>
-    <pathelement location="${basedir}/../Users/rachael.hull/Desktop/mail-1.4.7 .jar"/>
+    <pathelement location="${basedir}/libs/mail-1.4.7 .jar"/>
+    <pathelement location="${basedir}/libs/wemocontrol.jar"/>
   </path>
   
   <path id="discoballwemo.runtime.module.classpath">
     <pathelement location="${discoballwemo.testoutput.dir}"/>
     <pathelement location="${discoballwemo.output.dir}"/>
-    <pathelement location="${basedir}/../Users/rachael.hull/wemocontrol/build/libs/wemocontrol.jar"/>
-    <pathelement location="${basedir}/../Users/rachael.hull/Desktop/mail-1.4.7 .jar"/>
+    <pathelement location="${basedir}/libs/mail-1.4.7 .jar"/>
+    <pathelement location="${basedir}/libs/wemocontrol.jar"/>
   </path>
   
   
@@ -217,18 +217,16 @@
     <jar destfile="${temp.jar.path.DiscoBallWemo.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
       <zipfileset dir="${discoballwemo.output.dir}"/>
       <zipfileset src="${basedir}/../Users/rachael.hull/wemocontrol/build/libs/wemocontrol.jar"/>
-      <zipfileset src="${basedir}/../Users/rachael.hull/Desktop/mail-1.4.7 .jar"/>
+      <zipfileset src="${basedir}/libs/mail-1.4.7 .jar"/>
     </jar>
     <copy file="${temp.jar.path.DiscoBallWemo.jar}" tofile="${artifact.temp.output.discoballwemo:jar}/DiscoBallWemo.jar"/>
   </target>
-
+  
   <target name="build.all.artifacts" depends="artifact.discoballwemo:jar" description="Build all artifacts">
     <mkdir dir="${artifact.output.discoballwemo:jar}"/>
     <copy todir="${artifact.output.discoballwemo:jar}">
       <fileset dir="${artifact.temp.output.discoballwemo:jar}"/>
     </copy>
-
-
     
     <!-- Delete temporary files -->
     <delete dir="${artifacts.temp.dir}"/>
