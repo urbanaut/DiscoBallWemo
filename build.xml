@@ -226,12 +226,17 @@
   <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
 
   <target name="run" description="Runs JAR file" depends="compile.module.discoballwemo">
+    <property name="wemoIp" value="10.1.10.100"/>
+    <property name="wemoName" value="STGWemoDiscoBall"/>
+    <property name="runDuration" value="30"/>
+    <property name="mailBoxName" value="stgnewhirediscoball@gmail.com"/>
+    <property name="mailBoxPassword" value="!stgrocks!"/>
     <java jar="out/artifacts/DiscoBallWemo_jar/DiscoBallWemo.jar" fork="true">
-      <!--<arg value="10.1.10.100" description="IP address of UPNP device"/>-->
-      <!--<arg value="STGWemoDiscoBall" description="Name of UPNP device"/>-->
-      <!--<arg value="30" description="Minutes the device will run"/>-->
-      <!--<arg value="stgnewhirediscoball@gmail.com" description="Email address where app checks" />-->
-      <!--<arg value="!stgrocks!" description="password of email address"/>-->
+      <arg value="${wemoIp}" description="IP address of UPNP device"/>
+      <arg value="${wemoName}" description="Name of UPNP device"/>
+      <arg value="${runDuration}" description="Minutes the device will run"/>
+      <arg value="${mailBoxName}" description="Email address where app checks" />
+      <arg value="${mailBoxPassword}" description="password of email address"/>
     </java>
   </target>
 
