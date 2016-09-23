@@ -238,7 +238,7 @@
     <java jar="out/artifacts/DiscoBallWemo_jar/DiscoBallWemo.jar" fork="true">
       <arg value="10.1.10.105"/>
       <arg value="STGWemoDiscoBall"/>
-      <arg value="500000"/>
+      <arg value="3"/>
       <arg value="stgnewhirediscoball@gmail.com"/>
       <arg value="!stgrocks!"/>
     </java>

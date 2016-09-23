@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import javax.mail.*;
 
 public class WemoPlugController {
@@ -39,16 +40,17 @@ public class WemoPlugController {
                 wd = new WemoDevice("http://" + wemoIp + ":49153/setup.xml");
                 msg.setFlag(Flags.Flag.DELETED, true);
                 wd.turnOn();
-                System.out.println(wemoIp + " is on");
+                System.out.println(wemoName + " is on");
                 setSleep();
             }
-
+            else{
+                System.out.println("There are no recent messages in" + mailBoxName);
+            }
 
         } catch (Exception ex) {
-            System.out.println("No recent messages found in inbox: " + mailBoxName);
-            //wd.turnOff();
-            System.out.println(wemoName + " is off");
-            //ex.printStackTrace();
+            System.out.println("Can't connect to device at: " + wemoIp +
+                "\n" + wemoName + " is off");
+            System.exit(0);
         }
     }
 
@@ -56,7 +58,7 @@ public class WemoPlugController {
 
         long interval = (runDuration);
         try {
-            Thread.sleep(interval);
+            TimeUnit.MINUTES.sleep(interval);
             wd.turnOff();
             System.out.println(wemoIp + " is off");
 
