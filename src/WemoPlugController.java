@@ -6,14 +6,14 @@ public class WemoPlugController {
 
     private String wemoIp;
     private String wemoName;
-    private long runDuration;
+    private String runDuration;
     private String mailBoxName;
     private String mailBoxPassword;
 
     private Message msg;
     private WemoDevice wd;
 
-    private WemoPlugController(String wemoIp, String wemoName, long runDuration, String mailBoxName, String mailBoxPassword){
+    private WemoPlugController(String wemoIp, String wemoName, String runDuration, String mailBoxName, String mailBoxPassword){
 
         this.wemoIp = wemoIp;
         this.wemoName = wemoName;
@@ -23,9 +23,8 @@ public class WemoPlugController {
     }
 
     public static void main(String[] args) {
-
-        long parsedRunDuration = Long.parseLong(args[2]);
-        WemoPlugController wpc = new WemoPlugController(args[0], args[1], parsedRunDuration, args[3], args[4]);
+        
+        WemoPlugController wpc = new WemoPlugController(args[0], args[1], args[2], args[3], args[4]);
         //System.out.println(wpc.toString());
         wpc.runController();
     }
@@ -58,7 +57,7 @@ public class WemoPlugController {
 
     private void setSleep(){
 
-        long interval = (runDuration);
+        long interval = Long.parseLong(runDuration);
         try {
             TimeUnit.MINUTES.sleep(interval);
             wd.turnOff();
