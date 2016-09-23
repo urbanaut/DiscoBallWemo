@@ -1,45 +1,249 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<project name="DiscoBallWemo" default="jarfile">
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="discoballwemo" default="all">
+  
+  
+  <property file="build.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.ear"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/access-bridge-64.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Global Libraries -->
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module DiscoBallWemo -->
+  
+  <dirname property="module.discoballwemo.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.discoballwemo" value="${jdk.home.1.8}"/>
+  <property name="module.jdk.bin.discoballwemo" value="${jdk.bin.1.8}"/>
+  <property name="module.jdk.classpath.discoballwemo" value="jdk.classpath.1.8"/>
+  
+  <property name="compiler.args.discoballwemo" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="discoballwemo.output.dir" value="${module.discoballwemo.basedir}/out/production/DiscoBallWemo"/>
+  <property name="discoballwemo.testoutput.dir" value="${module.discoballwemo.basedir}/out/test/DiscoBallWemo"/>
+  
+  <path id="discoballwemo.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="discoballwemo.module.production.classpath">
+    <path refid="${module.jdk.classpath.discoballwemo}"/>
+    <pathelement location="${basedir}/../Users/rachael.hull/wemocontrol/build/libs/wemocontrol.jar"/>
+    <pathelement location="${basedir}/../Users/rachael.hull/Desktop/mail-1.4.7 .jar"/>
+  </path>
+  
+  <path id="discoballwemo.runtime.production.module.classpath">
+    <pathelement location="${discoballwemo.output.dir}"/>
+    <pathelement location="${basedir}/../Users/rachael.hull/wemocontrol/build/libs/wemocontrol.jar"/>
+    <pathelement location="${basedir}/../Users/rachael.hull/Desktop/mail-1.4.7 .jar"/>
+  </path>
+  
+  <path id="discoballwemo.module.classpath">
+    <path refid="${module.jdk.classpath.discoballwemo}"/>
+    <pathelement location="${discoballwemo.output.dir}"/>
+    <pathelement location="${basedir}/../Users/rachael.hull/wemocontrol/build/libs/wemocontrol.jar"/>
+    <pathelement location="${basedir}/../Users/rachael.hull/Desktop/mail-1.4.7 .jar"/>
+  </path>
+  
+  <path id="discoballwemo.runtime.module.classpath">
+    <pathelement location="${discoballwemo.testoutput.dir}"/>
+    <pathelement location="${discoballwemo.output.dir}"/>
+    <pathelement location="${basedir}/../Users/rachael.hull/wemocontrol/build/libs/wemocontrol.jar"/>
+    <pathelement location="${basedir}/../Users/rachael.hull/Desktop/mail-1.4.7 .jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.discoballwemo">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.discoballwemo">
+    <patternset refid="excluded.from.module.discoballwemo"/>
+  </patternset>
+  
+  <path id="discoballwemo.module.sourcepath">
+    <dirset dir="${module.discoballwemo.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.discoballwemo" depends="compile.module.discoballwemo.production,compile.module.discoballwemo.tests" description="Compile module DiscoBallWemo"/>
+  
+  <target name="compile.module.discoballwemo.production" depends="register.custom.compilers" description="Compile module DiscoBallWemo; production classes">
+    <mkdir dir="${discoballwemo.output.dir}"/>
+    <javac2 destdir="${discoballwemo.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.discoballwemo}/javac">
+      <compilerarg line="${compiler.args.discoballwemo}"/>
+      <bootclasspath refid="discoballwemo.module.bootclasspath"/>
+      <classpath refid="discoballwemo.module.production.classpath"/>
+      <src refid="discoballwemo.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.discoballwemo"/>
+    </javac2>
+    
+    <copy todir="${discoballwemo.output.dir}">
+      <fileset dir="${module.discoballwemo.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.discoballwemo.tests" depends="register.custom.compilers,compile.module.discoballwemo.production" description="compile module DiscoBallWemo; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.discoballwemo" description="cleanup module">
+    <delete dir="${discoballwemo.output.dir}"/>
+    <delete dir="${discoballwemo.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.discoballwemo" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.discoballwemo" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.discoballwemo:jar" value="${basedir}/out/artifacts/DiscoBallWemo_jar"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.DiscoBallWemo.jar" value="${artifacts.temp.dir}/DiscoBallWemo.jar"/>
+  </target>
+  
+  <target name="artifact.discoballwemo:jar" depends="init.artifacts, compile.module.discoballwemo" description="Build &#39;DiscoBallWemo:jar&#39; artifact">
+    <property name="artifact.temp.output.discoballwemo:jar" value="${artifacts.temp.dir}/DiscoBallWemo_jar"/>
+    <mkdir dir="${artifact.temp.output.discoballwemo:jar}"/>
+    <jar destfile="${temp.jar.path.DiscoBallWemo.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${discoballwemo.output.dir}"/>
+      <zipfileset src="${basedir}/../Users/rachael.hull/wemocontrol/build/libs/wemocontrol.jar"/>
+      <zipfileset src="${basedir}/../Users/rachael.hull/Desktop/mail-1.4.7 .jar"/>
+    </jar>
+    <copy file="${temp.jar.path.DiscoBallWemo.jar}" tofile="${artifact.temp.output.discoballwemo:jar}/DiscoBallWemo.jar"/>
+  </target>
 
-    <target name="init" description="Initializes properties">
-        <property name="project.name" value="DiscoBallWemo"/>
-        <property name="src.dir" value="src"/>
-        <property name="build.dir" value="build"/>
-        <property name="classes.dir" value="${build.dir}/classes"/>
-        <property name="etc.dir" value="etc"/>
-    </target>
+  <target name="build.all.artifacts" depends="artifact.discoballwemo:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.discoballwemo:jar}"/>
+    <copy todir="${artifact.output.discoballwemo:jar}">
+      <fileset dir="${artifact.temp.output.discoballwemo:jar}"/>
+    </copy>
 
-    <target name="prepare" description="Creates the build and classes directories" depends="init">
-        <mkdir dir="${classes.dir}"/>
-    </target>
 
-    <target name="compile" description="Compiles the code" depends="prepare">
-        <javac srcdir="${src.dir}" destdir="${classes.dir}">
-            <classpath>
-                <pathelement path="libs/mail-1.4.7"/>
-                <pathelement path="libs/wemocontrol"/>
-            </classpath>
-        </javac>
-    </target>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
 
-    <target name="jarfile" description="JARs the code" depends="compile">
-        <jar destfile="${build.dir}/${project.name}.jar"
-             basedir="${classes.dir}"
-             manifest="${src.dir}/META-INF/MANIFEST.MF"/>
-    </target>
-
-    <target name="clean" description="Delete the build directory" depends="init">
-        <delete dir="${build.dir}"/>
-    </target>
-
-    <target name="run" description="Runs the JAR file" depends="jarfile">
-        <java jar="${build.dir}/${project.name}.jar" fork="true">
-            <arg value="10.1.10.105"/>
-            <arg value="STGDiscoBallWemo"/>
-            <arg value="500000"/>
-            <arg value="stgnewhirediscoball@gmail.com"/>
-            <arg value="!stgrocks!"/>
-        </java>
-    </target>
+  <target name="run" description="Runs JAR file" depends="compile.module.discoballwemo">
+    <java jar="out/artifacts/DiscoBallWemo_jar/DiscoBallWemo.jar" fork="true">
+      <arg value="10.1.10.105"/>
+      <arg value="STGWemoDiscoBall"/>
+      <arg value="500000"/>
+      <arg value="stgnewhirediscoball@gmail.com"/>
+      <arg value="!stgrocks!"/>
+    </java>
+  </target>
 
 </project>
