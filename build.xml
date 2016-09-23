@@ -206,6 +206,9 @@
       <zipfileset dir="${discoballwemo.output.dir}"/>
       <zipfileset src="${basedir}/../Users/rachael.hull/wemocontrol/build/libs/wemocontrol.jar"/>
       <zipfileset src="${basedir}/libs/mail-1.4.7 .jar"/>
+      <manifest>
+        <attribute name="Main-Class" value="WemoPlugController"/>
+      </manifest>
     </jar>
     <copy file="${temp.jar.path.DiscoBallWemo.jar}" tofile="${artifact.temp.output.discoballwemo:jar}/DiscoBallWemo.jar"/>
   </target>
@@ -224,7 +227,7 @@
 
   <target name="run" description="Runs JAR file" depends="compile.module.discoballwemo">
     <java jar="out/artifacts/DiscoBallWemo_jar/DiscoBallWemo.jar" fork="true">
-      <arg value="10.1.10.105" description="IP address of UPNP device"/>
+      <arg value="10.1.10.100" description="IP address of UPNP device"/>
       <arg value="STGWemoDiscoBall" description="Name of UPNP device"/>
       <arg value="30" description="Minutes the device will run"/>
       <arg value="stgnewhirediscoball@gmail.com" description="Email address where app checks" />

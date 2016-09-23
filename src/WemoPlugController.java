@@ -34,9 +34,8 @@ public class WemoPlugController {
 
         try {
 
-            getEmail();
-
             if (msg.isSet(Flags.Flag.RECENT)) {
+                getEmail();
                 wd = new WemoDevice("http://" + wemoIp + ":49153/setup.xml");
                 msg.setFlag(Flags.Flag.DELETED, true);
                 wd.turnOn();
