@@ -10,10 +10,10 @@ public class WemoPlugController {
     private String mailBoxName;
     private String mailBoxPassword;
 
-    public Message msg;
-    public WemoDevice wd;
+    private Message msg;
+    private WemoDevice wd;
 
-    public WemoPlugController(String wemoIp, String wemoName, long runDuration, String mailBoxName, String mailBoxPassword){
+    private WemoPlugController(String wemoIp, String wemoName, long runDuration, String mailBoxName, String mailBoxPassword){
 
         this.wemoIp = wemoIp;
         this.wemoName = wemoName;
@@ -26,8 +26,8 @@ public class WemoPlugController {
 
         long parsedRunDuration = Long.parseLong(args[2]);
         WemoPlugController wpc = new WemoPlugController(args[0], args[1], parsedRunDuration, args[3], args[4]);
+        //System.out.println(wpc.toString());
         wpc.runController();
-
     }
 
     private void runController(){
@@ -49,6 +49,9 @@ public class WemoPlugController {
         } catch (Exception ex) {
             System.out.println("Can't connect to device at: " + wemoIp +
                 "\n" + wemoName + " is off");
+            System.out.println("Error " + ex.getMessage() + "\n");
+            ex.printStackTrace();
+
             System.exit(0);
         }
     }
@@ -76,7 +79,6 @@ public class WemoPlugController {
 
             Store store = session.getStore();
             store.connect("imap.gmail.com", mailBoxName, mailBoxPassword);
-
             Folder inbox = store.getFolder("INBOX");
             inbox.open(Folder.READ_WRITE);
 

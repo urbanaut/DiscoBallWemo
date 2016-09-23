@@ -227,11 +227,11 @@
 
   <target name="run" description="Runs JAR file" depends="compile.module.discoballwemo">
     <java jar="out/artifacts/DiscoBallWemo_jar/DiscoBallWemo.jar" fork="true">
-      <arg value="10.1.10.100" description="IP address of UPNP device"/>
-      <arg value="STGWemoDiscoBall" description="Name of UPNP device"/>
-      <arg value="30" description="Minutes the device will run"/>
-      <arg value="stgnewhirediscoball@gmail.com" description="Email address where app checks" />
-      <arg value="!stgrocks!" description="password of email address"/>
+      <!--<arg value="10.1.10.100" description="IP address of UPNP device"/>-->
+      <!--<arg value="STGWemoDiscoBall" description="Name of UPNP device"/>-->
+      <!--<arg value="30" description="Minutes the device will run"/>-->
+      <!--<arg value="stgnewhirediscoball@gmail.com" description="Email address where app checks" />-->
+      <!--<arg value="!stgrocks!" description="password of email address"/>-->
     </java>
   </target>
 
