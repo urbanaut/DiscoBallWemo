@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import javax.mail.*;
@@ -59,12 +60,14 @@ public class WemoPlugController {
                 System.out.println("There are no recent messages in" + mailBoxName);
             }
 
-        } catch (Exception ex) {
-            System.out.println("Can't connect to device at: " + wemoIp +
-                "\n" + wemoName + " is off");
-            System.out.println("Error " + ex.getMessage() + "\n");
-            ex.printStackTrace();
-
+        } catch (IndexOutOfBoundsException ex) {
+            System.out.println("Error: " + ex.getMessage() + "\n");
+            System.exit(0);
+        } catch (MessagingException ex){
+            System.out.println("Error: " + ex.getMessage() + "\n");
+            System.exit(0);
+        } catch (IOException ex){
+            System.out.println("Error: " + ex.getMessage() + "\n");
             System.exit(0);
         }
     }
