@@ -204,7 +204,7 @@
     <mkdir dir="${artifact.temp.output.discoballwemo:jar}"/>
     <jar destfile="${temp.jar.path.DiscoBallWemo.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
       <zipfileset dir="${discoballwemo.output.dir}"/>
-      <zipfileset src="${basedir}/../Users/rachael.hull/wemocontrol/build/libs/wemocontrol.jar"/>
+      <zipfileset src="${basedir}/libs/wemocontrol.jar"/>
       <zipfileset src="${basedir}/libs/mail-1.4.7 .jar"/>
       <manifest>
         <attribute name="Main-Class" value="WemoPlugController"/>
