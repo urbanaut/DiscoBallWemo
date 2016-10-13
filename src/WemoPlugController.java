@@ -69,13 +69,13 @@ public class WemoPlugController {
 
         } catch (IndexOutOfBoundsException ex) {
             System.out.println("Error: " + ex.getMessage() + "\n");
-            System.exit(0);
+            System.exit(1);
         } catch (MessagingException ex){
             System.out.println("Error: " + ex.getMessage() + "\n");
-            System.exit(0);
+            System.exit(1);
         } catch (IOException ex){
             System.out.println("Error: " + ex.getMessage() + "\n");
-            System.exit(0);
+            System.exit(1);
         }
     }
 
