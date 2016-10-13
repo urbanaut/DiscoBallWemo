@@ -161,7 +161,8 @@
   
   <target name="compile.module.discoballwemo.production" description="Compile module DiscoBallWemo; production classes">
     <mkdir dir="${discoballwemo.output.dir}"/>
-    <javac destdir="${discoballwemo.output.dir}" includeantruntime="false" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${java.home}/bin/javac">
+    <echoproperties/>
+    <javac destdir="${discoballwemo.output.dir}" includeantruntime="false" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
       <compilerarg line="${compiler.args.discoballwemo}"/>
       <bootclasspath refid="discoballwemo.module.bootclasspath"/>
       <classpath refid="discoballwemo.module.production.classpath"/>
