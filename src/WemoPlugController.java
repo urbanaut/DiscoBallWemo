@@ -50,7 +50,6 @@ public class WemoPlugController {
             if (msg.isSet(Flags.Flag.RECENT)) {
                 System.out.println("Subject: " + msg.getSubject());
                 System.out.println("Content: " + msg.getContent());
-
                 wd = new WemoDevice("http://" + wemoIp + ":49153/setup.xml");
                 msg.setFlag(Flags.Flag.DELETED, true);
                 wd.turnOn();
@@ -63,13 +62,13 @@ public class WemoPlugController {
 
         } catch (IndexOutOfBoundsException ex) {
             System.out.println("Error: " + ex.getMessage() + "\n");
-            System.exit(0);
+            System.exit(1);
         } catch (MessagingException ex){
             System.out.println("Error: " + ex.getMessage() + "\n");
-            System.exit(0);
+            System.exit(1);
         } catch (IOException ex){
             System.out.println("Error: " + ex.getMessage() + "\n");
-            System.exit(0);
+            System.exit(1);
         }
     }
 

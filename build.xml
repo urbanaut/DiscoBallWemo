@@ -226,8 +226,7 @@
   <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
 
   <target name="run" description="Runs JAR file" depends="compile.module.discoballwemo">
-    <!--<property name="wemoIp" value="10.1.10.100"/> -->
-    <property name="wemoIp" value="10.119.7.152"/>
+    <property name="wemoIp" value="10.1.10.100"/>
     <property name="wemoName" value="STGWemoDiscoBall"/>
     <property name="runDuration" value="30"/>
     <property name="mailBoxName" value="stgnewhirediscoball@gmail.com"/>
