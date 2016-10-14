@@ -25,7 +25,7 @@ public class WemoPlugController {
 
     public static void main(String[] args) {
 
-        WemoPlugController wpc = new WemoPlugController("10.119.7.152","DiscoWemo","30","stgnewhirediscoball@gmail.com","!stgrocks!"); //new WemoPlugController(args[0], args[1], args[2], args[3], args[4]);
+        WemoPlugController wpc = new WemoPlugController(args[0], args[1], args[2], args[3], args[4]);
         //System.out.println(wpc.toString());
         wpc.runController();
     }
