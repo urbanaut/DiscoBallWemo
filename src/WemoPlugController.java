@@ -5,7 +5,8 @@ import javax.mail.*;
 
 public class WemoPlugController {
 
-    private String wemoIp;
+    private List<String> wemoIps = new ArrayList<>();
+    //private String wemoIp;
     private String wemoName;
     private String runDuration;
     private String mailBoxName;
@@ -16,7 +17,9 @@ public class WemoPlugController {
 
     private WemoPlugController(String wemoIp, String wemoName, String runDuration, String mailBoxName, String mailBoxPassword){
 
-        this.wemoIp = wemoIp;
+        wemoIps = Arrays.asList(wemoIp.split(","));
+
+        //this.wemoIp = wemoIp;
         this.wemoName = wemoName;
         this.runDuration = runDuration;
         this.mailBoxName = mailBoxName;
@@ -30,6 +33,9 @@ public class WemoPlugController {
         wpc.runController();
     }
 
+    /** Test
+     *
+     */
     private void runController(){
 
         try {
@@ -46,15 +52,22 @@ public class WemoPlugController {
             msg = inbox.getMessage(inbox.getMessageCount());
             msg.setFlag(Flags.Flag.RECENT, true);
 
+            for (String wemoIp: wemoIps) {
+                System.out.println("Wemo IP:" + wemoIp);
+            }
 
             if (msg.isSet(Flags.Flag.RECENT)) {
                 System.out.println("Subject: " + msg.getSubject());
                 System.out.println("Content: " + msg.getContent());
-                wd = new WemoDevice("http://" + wemoIp + ":49153/setup.xml");
+                System.out.println("Connecting...");
+
+                for (String wemoIp: wemoIps) {
+                    wd = new WemoDevice("http://" + wemoIp + ":49153/setup.xml");
+                    wd.turnOn();
+                    System.out.println(wemoName + " is on");
+                    setSleep();
+                }
                 msg.setFlag(Flags.Flag.DELETED, true);
-                wd.turnOn();
-                System.out.println(wemoName + " is on");
-                setSleep();
             }
             else{
                 System.out.println("There are no recent messages in" + mailBoxName);
@@ -62,12 +75,15 @@ public class WemoPlugController {
 
         } catch (IndexOutOfBoundsException ex) {
             System.out.println("Error: " + ex.getMessage() + "\n");
+            ex.printStackTrace();
             System.exit(1);
         } catch (MessagingException ex){
             System.out.println("Error: " + ex.getMessage() + "\n");
+            ex.printStackTrace();
             System.exit(1);
         } catch (IOException ex){
             System.out.println("Error: " + ex.getMessage() + "\n");
+            ex.printStackTrace();
             System.exit(1);
         }
     }
@@ -78,12 +94,8 @@ public class WemoPlugController {
         try {
             TimeUnit.MINUTES.sleep(interval);
             wd.turnOff();
-            System.out.println(wemoIp + " is off");
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-
-
 }
