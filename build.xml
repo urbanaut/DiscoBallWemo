@@ -191,7 +191,7 @@
 
   <target name="clean" depends="clean.module.discoballwemo" description="cleanup all"/>
 
-  <target name="build.modules" depends="init, clean, compile.module.discoballwemo" description="build all modules"/>
+  <target name="build.modules" depends="init, clean, compile.module.discoballwemo, artifact.discoballwemo:jar, build.all.artifacts" description="build all modules"/>
 
   <target name="init.artifacts">
     <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
@@ -226,8 +226,8 @@
 
   <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
 
-  <target name="run" description="Runs JAR file" depends="compile.module.discoballwemo">
-    <property name="wemoIp" value="10.1.10.100"/>
+  <target name="run" description="Runs JAR file" depends="compile.module.discoballwemo, build.modules">
+    <property name="wemoIp" value="10.117.3.101"/>
     <property name="wemoName" value="STGWemoDiscoBall"/>
     <property name="runDuration" value="30"/>
     <property name="mailBoxName" value="stgnewhirediscoball@gmail.com"/>
