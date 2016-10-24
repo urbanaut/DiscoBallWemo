@@ -7,6 +7,7 @@ public class WemoPlugController {
 
     private List<String> wemoIps = new ArrayList<>();
     //private String wemoIp;
+    private String wemoPort;
     private String wemoName;
     private String runDuration;
     private String mailBoxName;
@@ -15,11 +16,12 @@ public class WemoPlugController {
     public Message msg;
     public WemoDevice wd;
 
-    private WemoPlugController(String wemoIp, String wemoName, String runDuration, String mailBoxName, String mailBoxPassword){
+    private WemoPlugController(String wemoIp, String wemoPort, String wemoName, String runDuration, String mailBoxName, String mailBoxPassword){
 
         wemoIps = Arrays.asList(wemoIp.split(","));
 
         //this.wemoIp = wemoIp;
+        this.wemoPort = wemoPort;
         this.wemoName = wemoName;
         this.runDuration = runDuration;
         this.mailBoxName = mailBoxName;
@@ -28,7 +30,7 @@ public class WemoPlugController {
 
     public static void main(String[] args) {
 
-        WemoPlugController wpc = new WemoPlugController(args[0], args[1], args[2], args[3], args[4]);
+        WemoPlugController wpc = new WemoPlugController(args[0], args[1], args[2], args[3], args[4], args[5]);
         //System.out.println(wpc.toString());
         wpc.runController();
     }
@@ -62,7 +64,7 @@ public class WemoPlugController {
                 System.out.println("Connecting...");
 
                 for (String wemoIp: wemoIps) {
-                    wd = new WemoDevice("http://" + wemoIp + ":49154/setup.xml");
+                    wd = new WemoDevice("http://" + wemoIp + ":" + wemoPort + "/setup.xml"); // If WeMo stops working, change port to either 49154 or 45153
                     wd.turnOn();
                     System.out.println(wemoName + " is on");
                     setSleep();
