@@ -55,7 +55,7 @@ public class WemoPlugController {
             msg.setFlag(Flags.Flag.RECENT, true);
 
             for (String wemoIp: wemoIps) {
-                System.out.println("Wemo IP:" + wemoIp);
+                System.out.println("Wemo IP:" + wemoIp + ":" + wemoPort);
             }
 
             if (msg.isSet(Flags.Flag.RECENT)) {
