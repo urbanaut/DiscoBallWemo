@@ -6,7 +6,6 @@ import javax.mail.*;
 public class WemoPlugController {
 
     private List<String> wemoIps = new ArrayList<>();
-    //private String wemoIp;
     private String wemoPort;
     private String wemoName;
     private String runDuration;
@@ -17,10 +16,7 @@ public class WemoPlugController {
     public WemoDevice wd;
 
     private WemoPlugController(String wemoIp, String wemoPort, String wemoName, String runDuration, String mailBoxName, String mailBoxPassword){
-
         wemoIps = Arrays.asList(wemoIp.split(","));
-
-        //this.wemoIp = wemoIp;
         this.wemoPort = wemoPort;
         this.wemoName = wemoName;
         this.runDuration = runDuration;
@@ -62,12 +58,12 @@ public class WemoPlugController {
                 System.out.println("Subject: " + msg.getSubject());
                 System.out.println("Content: " + msg.getContent());
                 System.out.println("Connecting...");
-
+                int ballNum = 1;
                 for (String wemoIp: wemoIps) {
                     wd = new WemoDevice("http://" + wemoIp + ":" + wemoPort + "/setup.xml"); // If WeMo stops working, change port to either 49154 or 45153
                     wd.turnOn();
-                    System.out.println(wemoName + " is on");
-
+                    System.out.println(wemoName + " " + ballNum + "is on");
+                    ballNum++;
                 }
                 setSleep();
                 msg.setFlag(Flags.Flag.DELETED, true);
@@ -92,7 +88,6 @@ public class WemoPlugController {
     }
 
     private void setSleep(){
-
         long interval = Long.parseLong(runDuration);
         try {
             TimeUnit.MINUTES.sleep(interval);
