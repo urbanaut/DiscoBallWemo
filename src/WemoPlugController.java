@@ -67,8 +67,9 @@ public class WemoPlugController {
                     wd = new WemoDevice("http://" + wemoIp + ":" + wemoPort + "/setup.xml"); // If WeMo stops working, change port to either 49154 or 45153
                     wd.turnOn();
                     System.out.println(wemoName + " is on");
-                    setSleep();
+
                 }
+                setSleep();
                 msg.setFlag(Flags.Flag.DELETED, true);
             }
             else{
