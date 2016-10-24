@@ -62,7 +62,7 @@ public class WemoPlugController {
                 System.out.println("Connecting...");
 
                 for (String wemoIp: wemoIps) {
-                    wd = new WemoDevice("http://" + wemoIp + ":49153/setup.xml");
+                    wd = new WemoDevice("http://" + wemoIp + ":49154/setup.xml");
                     wd.turnOn();
                     System.out.println(wemoName + " is on");
                     setSleep();
