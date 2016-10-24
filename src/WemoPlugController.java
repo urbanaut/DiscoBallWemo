@@ -71,16 +71,7 @@ public class WemoPlugController {
             else{
                 System.out.println("There are no recent messages in" + mailBoxName);
             }
-
-        } catch (IndexOutOfBoundsException ex) {
-            System.out.println("Error: " + ex.getMessage() + "\n");
-            ex.printStackTrace();
-            System.exit(1);
-        } catch (MessagingException ex){
-            System.out.println("Error: " + ex.getMessage() + "\n");
-            ex.printStackTrace();
-            System.exit(1);
-        } catch (IOException ex){
+        } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage() + "\n");
             ex.printStackTrace();
             System.exit(1);
