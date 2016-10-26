@@ -55,31 +55,31 @@ public class WemoPlugController {
             if (inbox.getMessageCount() > 1) {
                 msg = inbox.getMessage(inbox.getMessageCount());
                 msg.setFlag(Flags.Flag.RECENT, true);
+
+                for (String wemoIp: wemoIps) {
+                    System.out.println("Wemo IP:" + wemoIp + ":" + wemoPort);
+                }
+
+                if (msg.isSet(Flags.Flag.RECENT)) {
+                    System.out.println("Subject: " + msg.getSubject());
+                    System.out.println("Content: " + msg.getContent());
+                    System.out.println("Connecting...");
+                    int ballNum = 1;
+                    for (String wemoIp: wemoIps) {
+                        wd = new WemoDevice("http://" + wemoIp + ":" + wemoPort + "/setup.xml"); // If WeMo stops working, change port to either 49154 or 45153
+                        wd.turnOn();
+                        System.out.println(wemoName + " " + ballNum + " is on");
+                        ballNum++;
+                    }
+                    setSleep();
+                    msg.setFlag(Flags.Flag.DELETED, true);
+                }
+                else{
+                    System.out.println("There are no recent messages in" + mailBoxName);
+                }
             }
             else
                 System.out.println("No new messages found.");
-
-            for (String wemoIp: wemoIps) {
-                System.out.println("Wemo IP:" + wemoIp + ":" + wemoPort);
-            }
-
-            if (msg.isSet(Flags.Flag.RECENT)) {
-                System.out.println("Subject: " + msg.getSubject());
-                System.out.println("Content: " + msg.getContent());
-                System.out.println("Connecting...");
-                int ballNum = 1;
-                for (String wemoIp: wemoIps) {
-                    wd = new WemoDevice("http://" + wemoIp + ":" + wemoPort + "/setup.xml"); // If WeMo stops working, change port to either 49154 or 45153
-                    wd.turnOn();
-                    System.out.println(wemoName + " " + ballNum + " is on");
-                    ballNum++;
-                }
-                setSleep();
-                msg.setFlag(Flags.Flag.DELETED, true);
-            }
-            else{
-                System.out.println("There are no recent messages in" + mailBoxName);
-            }
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage() + "\n");
             ex.printStackTrace();
