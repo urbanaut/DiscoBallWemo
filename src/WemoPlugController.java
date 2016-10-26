@@ -28,9 +28,7 @@ public class WemoPlugController {
     }
 
     public static void main(String[] args) {
-
         WemoPlugController wpc = new WemoPlugController(args[0], args[1], args[2], args[3], args[4], args[5]);
-        //System.out.println(wpc.toString());
         wpc.runController();
     }
 
@@ -50,7 +48,7 @@ public class WemoPlugController {
             Folder inbox = store.getFolder("INBOX");
             inbox.open(Folder.READ_WRITE);
 
-            if (inbox.getMessageCount() > 1) {
+            if (inbox.getMessageCount() > 0) {
                 msg = inbox.getMessage(inbox.getMessageCount());
                 msg.setFlag(Flags.Flag.RECENT, true);
 
