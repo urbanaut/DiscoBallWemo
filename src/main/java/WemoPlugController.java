@@ -1,3 +1,6 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -5,6 +8,7 @@ import javax.mail.*;
 
 public class WemoPlugController {
 
+    private static Logger logger = LoggerFactory.getLogger(WemoPlugController.class);
     private List<String> wemoIps = new ArrayList<>();
     private String wemoPort;
     private String wemoName;
@@ -48,6 +52,8 @@ public class WemoPlugController {
             inbox.open(Folder.READ_WRITE);
 
             msg = inbox.getMessage(inbox.getMessageCount());
+            System.out.println("Message: " + msg);
+
             msg.setFlag(Flags.Flag.RECENT, true);
 
             for (String wemoIp: wemoIps) {
@@ -74,6 +80,7 @@ public class WemoPlugController {
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage() + "\n");
             ex.printStackTrace();
+            logger.error("Reported Error: ", ex);
             System.exit(1);
         }
     }
