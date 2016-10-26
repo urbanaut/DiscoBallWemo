@@ -2,8 +2,10 @@
   <library name="log4j-1.2.17">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/libs/log4j-1.2.17.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/slf4j-log4j12-1.7.12.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/slf4j-api-1.7.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/slf4j-log4j12-1.7.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/mail-1.4.7 .jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/wemocontrol.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
