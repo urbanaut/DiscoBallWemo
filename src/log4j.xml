@@ -9,8 +9,8 @@
         <param name="SMTPPort" value="465"/>
         <param name="SMTPUsername" value="stgtest.user@stgconsulting.com"/>
         <param name="SMTPPassword" value="Test_User_Password0"/>
-        <param name="From" value="bill.witt@stgconsulting.com"/>
-        <param name="To" value="stgtest.user@stgconsulting.com"/>
+        <param name="From" value="stgtest.user@stgconsulting.com"/>
+        <param name="To" value="bill.witt@stgconsulting.com,bryan.hansen@stgconsulting.com"/>
         <param name="Subject" value="WeMo Disco Ball Error Report"/>
         <param name="SMTPProtocol" value="smtps"/>
         <layout class="org.apache.log4j.PatternLayout">

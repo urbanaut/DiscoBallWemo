@@ -32,9 +32,7 @@ public class WemoPlugController {
         wpc.runController();
     }
 
-    /** Test
-     *
-     */
+
     private void runController(){
 
         try {
@@ -42,9 +40,9 @@ public class WemoPlugController {
             props.setProperty("mail.store.protocol", "imaps");
 
             Session session = Session.getInstance(props, null);
-
             Store store = session.getStore();
             store.connect("imap.gmail.com", mailBoxName, mailBoxPassword);
+
             Folder inbox = store.getFolder("INBOX");
             inbox.open(Folder.READ_WRITE);
 
