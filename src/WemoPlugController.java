@@ -52,10 +52,12 @@ public class WemoPlugController {
             Folder inbox = store.getFolder("INBOX");
             inbox.open(Folder.READ_WRITE);
 
-            msg = inbox.getMessage(inbox.getMessageCount());
-            System.out.println("Message: " + msg);
-
-            msg.setFlag(Flags.Flag.RECENT, true);
+            if (inbox.getMessageCount() > 1) {
+                msg = inbox.getMessage(inbox.getMessageCount());
+                msg.setFlag(Flags.Flag.RECENT, true);
+            }
+            else
+                System.out.println("No new messages found.");
 
             for (String wemoIp: wemoIps) {
                 System.out.println("Wemo IP:" + wemoIp + ":" + wemoPort);
