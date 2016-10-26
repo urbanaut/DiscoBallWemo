@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+WemoPlugController-Class: WemoPlugController
+Main-Class: WemoPlugController
+
